@@ -29,7 +29,7 @@ on:
       CACHE_BUILD:
         description: '缓存加速'
         required: false
-        default: 'true'
+        default: true
         type: boolean
 
 env:
@@ -40,12 +40,12 @@ env:
   Firmware_Name: immortalwrt-all
   DIY_P1_SH: smpackage/immortalwrt-all-1.sh
   DIY_P2_SH: smpackage/immortalwrt-all-2.sh
-  UPLOAD_BIN_DIR: false
+  UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_BUILDINFO: true
   UPLOAD_PACKAGE: true
-  UPLOAD_COWTRANSFER: false
-  UPLOAD_WETRANSFER: false
+  UPLOAD_COWTRANSFER: true
+  UPLOAD_WETRANSFER: true
   UPLOAD_RELEASE: true
   GITHUB_TOKEN: ${{ secrets.GIT_USER_TOKEN }}
   TZ: Asia/Shanghai
