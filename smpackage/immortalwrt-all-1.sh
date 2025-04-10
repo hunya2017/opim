@@ -138,6 +138,6 @@ sed -i '$a src-git netspeedtest https://github.com/sirpdboy/netspeedtest' feeds.
 echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
 
 
-cd openwrt || exit
+cd openwrt
 ./scripts/feeds update -a
 # rm -rf feeds/luci/applications/luci-app-passwall
