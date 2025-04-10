@@ -1,14 +1,14 @@
 name: Remove old artifacts
 
 on:
-  schedule:
-    # Every day at 1am
-    - cron: 0 8 * * 5
+  # schedule:
+  # Every day at 1am
+  # - cron: 0 8 * * 5
   release:
-    types: [published] 
+    types: [ published ]
 
   watch:
-    types: [started]
+    types: [ started ]
 
 jobs:
   remove-old-artifacts:
