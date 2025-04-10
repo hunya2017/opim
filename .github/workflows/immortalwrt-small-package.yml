@@ -11,8 +11,8 @@ name: immortalwrt-small-package
 on:
   # schedule: # - cron: 0 22 * * *
 
-  release:
-    types: [ published ]
+  # release:
+  #   types: [ published ]
 
   watch:
     types: [ started ]

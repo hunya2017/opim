@@ -11,8 +11,8 @@ name: immortalwrt-fly-iStore
 on:
   # schedule: # - cron: 0 23 * * *
 
-  release:
-    types: [ published ]
+  # release:
+  #   types: [ published ]
 
   watch:
     types: [ started ]
