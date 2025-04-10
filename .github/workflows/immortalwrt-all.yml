@@ -24,10 +24,41 @@ on:
       ssh:
         description: 'SSH connection to Actions'
         required: false
-        default: 'false'
+        default: true
+        type: boolean
 
       CACHE_BUILD:
         description: '缓存加速'
+        required: false
+        default: true
+        type: boolean
+
+      UPLOAD_BIN_DIR:
+        description: '是否上传完整固件目录'
+        required: false
+        default: true
+        type: boolean
+
+      UPLOAD_FIRMWARE:
+        description: '是否上传固件'
+        required: false
+        default: true
+        type: boolean
+
+      UPLOAD_BUILDINFO:
+        description: '是否上传配置文件'
+        required: false
+        default: true
+        type: boolean
+
+      UPLOAD_PACKAGE:
+        description: '是否上传插件'
+        required: false
+        default: true
+        type: boolean
+
+      UPLOAD_RELEASE:
+        description: '是否发布到 Releases'
         required: false
         default: true
         type: boolean
@@ -40,13 +71,13 @@ env:
   Firmware_Name: immortalwrt-all
   DIY_P1_SH: smpackage/immortalwrt-all-1.sh
   DIY_P2_SH: smpackage/immortalwrt-all-2.sh
-  UPLOAD_BIN_DIR: true
-  UPLOAD_FIRMWARE: true
-  UPLOAD_BUILDINFO: true
-  UPLOAD_PACKAGE: true
-  UPLOAD_COWTRANSFER: true
-  UPLOAD_WETRANSFER: true
-  UPLOAD_RELEASE: true
+  # UPLOAD_BIN_DIR: true
+  # UPLOAD_FIRMWARE: true
+  # UPLOAD_BUILDINFO: true
+  # UPLOAD_PACKAGE: true
+  # UPLOAD_COWTRANSFER: true
+  # UPLOAD_WETRANSFER: true
+  # UPLOAD_RELEASE: true
   GITHUB_TOKEN: ${{ secrets.GIT_USER_TOKEN }}
   TZ: Asia/Shanghai
 
@@ -248,7 +279,7 @@ jobs:
 
     - name: 整理文件
       id: organize
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_BIN_DIR == 'true' && !cancelled()
       run: |
         cd openwrt/bin/targets/*/*
         # rm -rf packages
@@ -257,7 +288,7 @@ jobs:
 
     - name: 上传完整固件目录
       uses: actions/upload-artifact@v4
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BIN_DIR == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_BIN_DIR == 'true' && !cancelled()
       with:
         name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
@@ -281,21 +312,21 @@ jobs:
         rename "s/openwrt/${{ env.Firmware_Name }}/" *
 
     - name: 上传固件
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_FIRMWARE == 'true' && !cancelled()
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_firmware_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/artifact/firmware/
 
     - name: 上传配置文件
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_BUILDINFO == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_BUILDINFO == 'true' && !cancelled()
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_buildinfo${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/artifact/buildinfo/
 
     - name: 上传插件
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_PACKAGE == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_PACKAGE == 'true' && !cancelled()
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_package${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
@@ -303,7 +334,7 @@ jobs:
 
     - name: 生成发布标签
       id: tag
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_RELEASE == 'true' && !cancelled()
       run: |
         echo "release_tag=$(date +"%Y.%m.%d.%H.%M")-${{ env.Firmware_Name }}" >> $GITHUB_OUTPUT
         echo "release_date=$(date +"%Y.%m.%d.%H.%M")" >> $GITHUB_OUTPUT
@@ -328,7 +359,7 @@ jobs:
 
     - name: 自动发布固件到 Releases
       uses: softprops/action-gh-release@v2
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_RELEASE == 'true' && !cancelled()
       env:
         GITHUB_TOKEN: ${{ secrets.GIT_USER_TOKEN }}
       with:
@@ -348,7 +379,7 @@ jobs:
     - name: 删除自动发布的旧固件
       uses: dev-drprasad/delete-older-releases@v0.3.3
       continue-on-error: true
-      if: steps.compile.outputs.status == 'success' && env.UPLOAD_RELEASE == 'true' && !cancelled()
+      if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_RELEASE == 'true' && !cancelled()
       with:
         keep_latest: 20 #保留多少个releases不删除
         delete_tags: true
