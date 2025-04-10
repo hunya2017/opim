@@ -105,8 +105,6 @@
 # 自定义定制选项
 # NET="package/base-files/files/bin/config_generate"
 # ZZZ="package/emortal/default-settings/files/99-default-settings"
-UCI_DEFAULTS="package/emortal/default-settings/files/etc/uci-defaults/99-custom-init"
-
 # 定义路径变量
 UCI_DEFAULTS="package/emortal/default-settings/files/etc/uci-defaults/99-custom-init"
 
