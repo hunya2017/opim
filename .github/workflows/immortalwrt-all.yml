@@ -67,7 +67,7 @@ env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
   REPO_BRANCH: openwrt-24.10
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: config/immortalwrt.info
+  CONFIG_FILE: smpackage/immortalwrt.info
   Firmware_Name: immortalwrt-all
   DIY_P1_SH: smpackage/immortalwrt-all-1.sh
   DIY_P2_SH: smpackage/immortalwrt-all-2.sh
@@ -263,7 +263,7 @@ jobs:
       run: |
         git config --global user.name "GitHub Actions"
         git config --global user.email "actions@github.com"
-        git add config/immortalwrt.info
+        git add smpackage/immortalwrt.info
         git commit -m "Add generated .config file to config folder"
         git push origin ${{ github.ref }}
 
