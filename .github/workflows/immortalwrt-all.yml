@@ -296,12 +296,48 @@ jobs:
         cd artifact/firmware/
         rename "s/openwrt/${{ env.Firmware_Name }}/" *
 
+    # - name: 上传固件
+    #   if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_FIRMWARE == 'true' && !cancelled()
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_firmware_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+    #     path: openwrt/artifact/firmware/
+
+    # - name: 上传配置文件
+    #   if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_BUILDINFO == 'true' && !cancelled()
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_buildinfo${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+    #     path: openwrt/artifact/buildinfo/
+
+    # - name: 上传插件
+    #   if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_PACKAGE == 'true' && !cancelled()
+    #   uses: actions/upload-artifact@v4
+    #   with:
+    #     name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_package${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+    #     path: openwrt/artifact/package/
+
+    - name: 上传完整固件目录
+      uses: actions/upload-artifact@v4
+      if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_BIN_DIR == 'true' && !cancelled()
+      with:
+        name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        path: ${{ env.FIRMWARE }}
+        if-no-files-found: error
+        retention-days: 30
+        compression-level: 6
+        overwrite: true
+
     - name: 上传固件
       if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_FIRMWARE == 'true' && !cancelled()
       uses: actions/upload-artifact@v4
       with:
         name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_firmware_${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/artifact/firmware/
+        if-no-files-found: error
+        retention-days: 30
+        compression-level: 6
+        overwrite: true
 
     - name: 上传配置文件
       if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_BUILDINFO == 'true' && !cancelled()
@@ -309,6 +345,10 @@ jobs:
       with:
         name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_buildinfo${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/artifact/buildinfo/
+        if-no-files-found: warn
+        retention-days: 30
+        compression-level: 6
+        overwrite: true
 
     - name: 上传插件
       if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_PACKAGE == 'true' && !cancelled()
@@ -316,6 +356,10 @@ jobs:
       with:
         name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_package${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: openwrt/artifact/package/
+        if-no-files-found: warn
+        retention-days: 30
+        compression-level: 6
+        overwrite: true
 
     - name: 生成发布标签
       id: tag
