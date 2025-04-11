@@ -251,6 +251,23 @@ jobs:
         [ -s DEVICE_NAME ] && echo "DEVICE_NAME=_$(cat DEVICE_NAME)" >> $GITHUB_ENV
         echo "FILE_DATE=_$(date +"%Y%m%d%H%M")" >> $GITHUB_ENV
 
+    - name: 将生成的 .config 文件复制到 config 文件夹
+      if: steps.compile.outputs.status == 'success' && !cancelled()
+      run: |
+        mkdir -p config
+        cp openwrt/.config config/immortalwrt.info
+
+    - name: 提交 .config 文件到源码库
+      if: steps.compile.outputs.status == 'success' && !cancelled()
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        git config --global user.name "GitHub Actions"
+        git config --global user.email "actions@github.com"
+        git add config/immortalwrt.info
+        git commit -m "Add generated .config file to config folder"
+        git push origin ${{ github.ref }}
+
     # - name: 检查空间使用情况
     #   if: steps.compile.outputs.status == 'success' && !cancelled()
     #   run: df -hT
