@@ -28,15 +28,12 @@ sed -i "/exit 0/i\
 exec >/tmp/setup.log 2>&1\n\
 \n\
 # 设置 root 密码\n\
-root_password=\"password\"\n\
-[ -n \"$root_password\" ] && (echo \"$root_password\"; sleep 1; echo \"$root_password\") | passwd > /dev/null\n\
+echo \"password\" | passwd --stdin root > /dev/null\n\
 \n\
 # 设置 LAN IP\n\
-lan_ip_address=\"192.168.10.1\"\n\
-[ -n \"$lan_ip_address\" ] && {\n\
-  uci set network.lan.ipaddr=\"$lan_ip_address\"\n\
-  uci commit network\n\
-}\n\
+uci set network.lan.ipaddr=\"192.168.10.1\"\n\
+uci commit network\n\
+
 \n\
 # 设置 DHCP 租期\n\
 uci set dhcp.lan.leasetime=\"2m\"\n\
