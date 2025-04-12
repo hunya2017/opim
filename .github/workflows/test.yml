@@ -18,4 +18,6 @@ jobs:
         ./smpackage/immortalwrt-all-2.sh
 
     - name: Verify output
-      run: cat package/emortal/default-settings/files/99-default-settings
+      run: |
+        echo "Contents of 99-default-settings:"
+        cat package/emortal/default-settings/files/99-default-settings
