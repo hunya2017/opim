@@ -257,15 +257,20 @@ jobs:
         cp openwrt/.config config/immortalwrt.info
 
     - name: 提交 .config 文件到源码库
-      if: steps.compile.outputs.status == 'success' && !cancelled()
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        git config --global user.name "GitHub Actions"
-        git config --global user.email "actions@github.com"
-        git add config/immortalwrt.info
-        git commit -m "Add generated .config file to config folder"
-        git push origin ${{ github.ref }}
+  if: steps.compile.outputs.status == 'success' && !cancelled()
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  run: |
+    git config --global user.name "GitHub Actions"
+    git config --global user.email "actions@github.com"
+    # 检查 config/immortalwrt.info 文件是否有更改
+    if ! git diff --quiet -- config/immortalwrt.info; then
+      git add config/immortalwrt.info
+      git commit -m "Update .config file"
+      git push origin ${{ github.ref }}
+    else
+      echo "No changes in .config file to commit."
+    fi
 
     # - name: 检查空间使用情况
     #   if: steps.compile.outputs.status == 'success' && !cancelled()
