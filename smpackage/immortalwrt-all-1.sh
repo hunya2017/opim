@@ -11,6 +11,5 @@
 # =================================================================
 
 git clone https://github.com/rufengsuixing/luci-app-adguardhome package/luci-app-adguardhome
-sed -i '$a src-git netspeedtest https://github.com/sirpdboy/netspeedtest' feeds.conf.default
 echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
 ./scripts/feeds update -a
