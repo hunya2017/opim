@@ -71,8 +71,7 @@ echo "All done!"
 EOF
 
 # 将内容插入到 exit 0 之前
-sed -i "/exit 0/i\\
-$(cat $TMP_FILE)" "$UCI_DEFAULTS"
+sed -i "/exit 0/i $(printf '%s\n' "$(cat $TMP_FILE)")" "$UCI_DEFAULTS"
 rm -f "$TMP_FILE"
 
 # 添加执行权限
