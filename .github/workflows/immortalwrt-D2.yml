@@ -6,7 +6,7 @@
 # Copyright (C) 2020 KFERMercer
 # chmod +x /etc/init.d/netspeedtest
 
-name: immortalwrt-all
+name: immortalwrt-D2
 
 on:
   # # schedule:
