@@ -9,8 +9,8 @@
 name: immortalwrt-all
 
 on:
-  # # schedule:
-  #   - cron: '0 22 * * *'
+    schedule:
+     - cron: '0 22 * * *'
 
   # release:
   #   types: [ published ]
