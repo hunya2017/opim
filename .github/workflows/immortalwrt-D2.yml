@@ -222,6 +222,7 @@ jobs:
         cd openwrt
         make defconfig
         make download -j$(($(nproc)+1))
+        make toolchain/install
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;        
 
