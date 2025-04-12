@@ -23,9 +23,8 @@ if [ ! -f "$UCI_DEFAULTS" ]; then
   echo "exit 0" >>"$UCI_DEFAULTS"
 fi
 
-# 使用 cat <<EOF 创建临时文件
-TMP_FILE=$(mktemp)
-cat <<EOF >"$TMP_FILE"
+# 使用 cat <<EOF 创建插入内容
+INSERT_CONTENT=$(cat <<EOF
 # 日志重定向
 exec >/tmp/setup.log 2>&1
 
@@ -69,9 +68,15 @@ uci commit vlmcsd
 
 echo "All done!"
 EOF
+)
 
-# 将内容插入到 exit 0 之前
-sed -i "/exit 0/r $TMP_FILE" "$UCI_DEFAULTS"
-rm -f "$TMP_FILE"
+# 手动插入内容到 exit 0 之前
+awk -v insert="$INSERT_CONTENT" '
+/^exit 0$/ {
+    print insert
+}
+{ print }
+' "$UCI_DEFAULTS" > "${UCI_DEFAULTS}.tmp" && mv "${UCI_DEFAULTS}.tmp" "$UCI_DEFAULTS"
+
 # 添加执行权限
-[ -f "$UCI_DEFAULTS" ] && chmod +x "$UCI_DEFAULTS"
+chmod +x "$UCI_DEFAULTS"
