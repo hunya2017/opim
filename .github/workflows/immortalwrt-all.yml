@@ -257,8 +257,8 @@ jobs:
         cp openwrt/.config config/immortalwrt.info
 
     - name: 提交 .config 文件到源码库
-  if: steps.compile.outputs.status == 'success' && !cancelled()
-  env:
+      if: steps.compile.outputs.status == 'success' && !cancelled()
+      env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   run: |
     git config --global user.name "GitHub Actions"
