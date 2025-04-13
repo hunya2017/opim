@@ -29,8 +29,8 @@ INSERT_CONTENT=$(cat <<EOF
 exec >/tmp/setup.log 2>&1
 
 # Set a default root password if not already set
-root_password=""
-lan_ip_address="192.168.1.1"
+root_password="password"
+lan_ip_address="192.168.10.1"
 
 if [ -n "$root_password" ]; then
   (echo "$root_password"; sleep 1; echo "$root_password") | passwd > /dev/null
