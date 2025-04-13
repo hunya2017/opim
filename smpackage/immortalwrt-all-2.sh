@@ -29,11 +29,11 @@ INSERT_CONTENT=$(cat <<EOF
 exec >/tmp/setup.log 2>&1
 
 # 设置 root 密码
-echo "root:password" | chpasswd
+# echo "root:password" | chpasswd
 
 # 设置 LAN IP
-uci set network.lan.ipaddr="192.168.10.1"
-uci commit network
+# uci set network.lan.ipaddr="192.168.10.1"
+# uci commit network
 
 # 设置 DHCP 租期
 uci set dhcp.lan.leasetime="2m"
