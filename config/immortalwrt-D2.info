@@ -1,0 +1,62 @@
+#
+# Automatically generated file; DO NOT EDIT.
+# ImmortalWrt Configuration
+#
+CONFIG_MODULES=y
+CONFIG_HAVE_DOT_CONFIG=y
+CONFIG_HOST_OS_LINUX=y
+# CONFIG_HOST_OS_MACOS is not set
+# CONFIG_PACKAGE_ubnt-manager is not set
+# CONFIG_PACKAGE_ucode-mod-bpf is not set
+CONFIG_PACKAGE_ucode-mod-html=y
+CONFIG_PACKAGE_ucode-mod-lua=y
+# CONFIG_PACKAGE_ucode-mod-uclient is not set
+# CONFIG_PACKAGE_ucode-mod-udebug is not set
+# CONFIG_PACKAGE_udebug-cli is not set
+# CONFIG_PACKAGE_udebugd is not set
+# CONFIG_PACKAGE_udns-dnsget is not set
+# CONFIG_PACKAGE_udns-ex-rdns is not set
+# CONFIG_PACKAGE_udns-rblcheck is not set
+# CONFIG_PACKAGE_ugps is not set
+# CONFIG_PACKAGE_uhubctl is not set
+# CONFIG_PACKAGE_uledd is not set
+# CONFIG_PACKAGE_unix2dos is not set
+# CONFIG_PACKAGE_unshare is not set
+# CONFIG_PACKAGE_usb-modeswitch is not set
+# CONFIG_PACKAGE_usbids is not set
+# CONFIG_PACKAGE_usbutils is not set
+# CONFIG_PACKAGE_uuidd is not set
+# CONFIG_PACKAGE_uuidgen is not set
+# CONFIG_PACKAGE_uvcdynctrl is not set
+# CONFIG_PACKAGE_v4l-utils is not set
+# CONFIG_PACKAGE_view1090 is not set
+# CONFIG_PACKAGE_viewadsb is not set
+# CONFIG_PACKAGE_watchcat is not set
+# CONFIG_PACKAGE_whereis is not set
+# CONFIG_PACKAGE_which is not set
+# CONFIG_PACKAGE_whiptail is not set
+# CONFIG_PACKAGE_whois is not set
+# CONFIG_PACKAGE_wifitoggle is not set
+# CONFIG_PACKAGE_wipe is not set
+# CONFIG_PACKAGE_xsltproc is not set
+# CONFIG_PACKAGE_xxd is not set
+# CONFIG_PACKAGE_xxhash is not set
+# CONFIG_PACKAGE_yafut is not set
+# CONFIG_PACKAGE_yanglint is not set
+# CONFIG_PACKAGE_yara is not set
+# CONFIG_PACKAGE_ykclient is not set
+# CONFIG_PACKAGE_ykpers is not set
+# CONFIG_PACKAGE_yq is not set
+# CONFIG_PACKAGE_zyxel-reset is not set
+# end of Utilities
+
+#
+# Xorg
+#
+
+#
+# Font-Utils
+#
+# CONFIG_PACKAGE_fontconfig is not set
+# end of Font-Utils
+# end of Xorg
