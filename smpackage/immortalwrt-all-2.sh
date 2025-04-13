@@ -28,12 +28,21 @@ INSERT_CONTENT=$(cat <<EOF
 # 日志重定向
 exec >/tmp/setup.log 2>&1
 
-# 设置 root 密码
-# echo "root:password" | chpasswd
+# Set a default root password if not already set
+root_password=""
+lan_ip_address="192.168.1.1"
 
-# 设置 LAN IP
-# uci set network.lan.ipaddr="192.168.10.1"
-# uci commit network
+if [ -n "$root_password" ]; then
+  (echo "$root_password"; sleep 1; echo "$root_password") | passwd > /dev/null
+fi
+
+# Configure LAN
+# More options: https://openwrt.org/docs/guide-user/base-system/basic-networking
+if [ -n "$lan_ip_address" ]; then
+  uci set network.lan.ipaddr="$lan_ip_address"
+  uci commit network
+fi
+
 
 # 设置 DHCP 租期
 uci set dhcp.lan.leasetime="2m"
