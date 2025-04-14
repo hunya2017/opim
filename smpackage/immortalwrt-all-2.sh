@@ -28,19 +28,10 @@ INSERT_CONTENT=$(cat <<EOF
 # 日志重定向
 exec >/tmp/setup.log 2>&1
 
-<<<<<<< HEAD
-# 
+# 设置主机ip地址 
 uci set network.lan.ipaddr='192.168.10.1'
 uci commit network
-=======
-# Set a default root password if not already set
 
-
-# Configure LAN
-uci set network.lan.ipaddr="192.168.10.1"
-uci commit network
-
->>>>>>> 67067c51cbf5a96e746c343690846a2a495c299f
 
 # 设置 DHCP 租期
 uci set dhcp.lan.leasetime="2m"
