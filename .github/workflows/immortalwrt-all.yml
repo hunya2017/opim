@@ -29,37 +29,37 @@ on:
 
       CACHE_BUILD:
         description: '缓存加速'
-        required: false
+        required: true
         default: true
         type: boolean
 
       UPLOAD_BIN_DIR:
         description: '是否上传完整固件目录'
-        required: false
+        required: true
         default: true
         type: boolean
 
       UPLOAD_FIRMWARE:
         description: '是否上传固件'
-        required: false
+        required: true
         default: true
         type: boolean
 
       UPLOAD_BUILDINFO:
         description: '是否上传配置文件'
-        required: false
+        required: true
         default: true
         type: boolean
 
       UPLOAD_PACKAGE:
         description: '是否上传插件'
-        required: false
+        required: true
         default: true
         type: boolean
 
       UPLOAD_RELEASE:
         description: '是否发布到 Releases'
-        required: false
+        required: true
         default: true
         type: boolean
 
