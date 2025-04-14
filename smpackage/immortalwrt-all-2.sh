@@ -10,8 +10,8 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-./scripts/feeds update istore
-./scripts/feeds install -d y -p istore luci-app-store
+# ./scripts/feeds update istore
+# ./scripts/feeds install -d y -p istore luci-app-store
 
 # 定义路径变量
 UCI_DEFAULTS="package/emortal/default-settings/files/99-default-settings"

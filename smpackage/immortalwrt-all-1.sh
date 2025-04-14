@@ -12,4 +12,6 @@
 
 git clone https://github.com/rufengsuixing/luci-app-adguardhome package/luci-app-adguardhome
 echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
-./scripts/feeds update -a
+# add feed
+echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> "feeds.conf.default"
+
