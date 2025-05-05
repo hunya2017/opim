@@ -161,11 +161,14 @@ jobs:
 
     - name: 安装源 #Install feeds
       run: |
+        
+        [ -e $PACTH_1 ] && mv $PACTH_1 openwrt/package/emortal/default-settings/patch1.patch
+        [ -e $PACTH_2 ] && mv $PACTH_2 openwrt/package/emortal/default-settings/files/99-my-default-settings
+
         cd openwrt
         ./scripts/feeds install -a
 
-        [ -e $PACTH_1 ] && mv $PACTH_1 openwrt/package/emortal/default-settings/patch1.patch
-        [ -e $PACTH_2 ] && mv $PACTH_2 openwrt/package/emortal/default-settings/files/99-my-default-settings
+
 
         cd package/emortal/default-settings
         patch -p1 < "openwrt/package/emortal/default-settings/patch1.patch"
