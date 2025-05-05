@@ -70,6 +70,8 @@ env:
   Firmware_Name: immortalwrt-all
   DIY_P1_SH: smpackage/immortalwrt-all-1.sh
   DIY_P2_SH: smpackage/immortalwrt-all-2.sh
+  PACTH_1: smpackage/patch1.patch
+  PACTH_2: smpackage/99-my-default-settings
   UPLOAD_BIN_DIR: true
   UPLOAD_FIRMWARE: true
   UPLOAD_BUILDINFO: true
@@ -166,10 +168,15 @@ jobs:
       run: |
         # [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
+
+        [ -e $PACTH_1 ] && mv $PACTH_1 openwrt/package/emortal/default-settings/patch1.patch
+        [ -e $PACTH_2 ] && mv $PACTH_2 openwrt/package/emortal/default-settings/files/99-my-default-settings
+
+
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-        cat package/emortal/default-settings/files/99-default-settings
+        cat package/emortal/default-settings/files/99-my-default-settings
 
     - name: SSH connection to Actions
       # Check if SSH input is explicitly enabled or if the action name contains 'ssh'
