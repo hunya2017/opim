@@ -170,7 +170,7 @@ jobs:
 
 
 
-        cd package/emortal/default-settings$
+        cd package/emortal/default-settings
 
         patch -p1 < "patch1.patch"
 
