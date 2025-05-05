@@ -361,16 +361,16 @@ jobs:
     #     name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_package${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
     #     path: openwrt/artifact/package/
 
-    - name: 上传完整固件目录
-      uses: actions/upload-artifact@v4
-      if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_BIN_DIR == 'true' && !cancelled()
-      with:
-        name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
-        path: ${{ env.FIRMWARE }}
-        if-no-files-found: error
-        retention-days: 30
-        compression-level: 6
-        overwrite: true
+    # - name: 上传完整固件目录
+    #   uses: actions/upload-artifact@v4
+    #   if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_BIN_DIR == 'true' && !cancelled()
+    #   with:
+    #     name: ${{ env.Firmware_Name }}_${{ env.REPO_BRANCH }}_bin${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+    #     path: ${{ env.FIRMWARE }}
+    #     if-no-files-found: error
+    #     retention-days: 30
+    #     compression-level: 6
+    #     overwrite: true
 
     - name: 上传固件
       if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_FIRMWARE == 'true' && !cancelled()
