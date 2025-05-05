@@ -9,7 +9,7 @@
 name: immortalwrt-all
 
 on:
- # schedule:
+  # schedule:
   # - cron: '0 22 * * *'
   # release:
   #   types: [ published ]
@@ -64,7 +64,7 @@ on:
 
 env:
   REPO_URL: https://github.com/immortalwrt/immortalwrt
-  REPO_BRANCH: openwrt-24.10
+  REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: config/immortalwrt.info
   Firmware_Name: immortalwrt-all
