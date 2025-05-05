@@ -10,9 +10,6 @@
 # Description: OpenWrt DIY script part 2 (After Update feeds)
 #
 
-patch -p1 < "openwrt/package/emortal/default-settings/patch1.patch"
-
-
 # 定义路径变量
 UCI_DEFAULTS="package/emortal/default-settings/files/99-my-default-settings"
 

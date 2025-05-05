@@ -164,13 +164,17 @@ jobs:
         cd openwrt
         ./scripts/feeds install -a
 
+        [ -e $PACTH_1 ] && mv $PACTH_1 openwrt/package/emortal/default-settings/patch1.patch
+        [ -e $PACTH_2 ] && mv $PACTH_2 openwrt/package/emortal/default-settings/files/99-my-default-settings
+
+        cd package/emortal/default-settings
+        patch -p1 < "openwrt/package/emortal/default-settings/patch1.patch"
+
     - name: patch2补丁和自定义设置
       run: |
         # [ -e files ] && mv files openwrt/files
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
 
-        [ -e $PACTH_1 ] && mv $PACTH_1 openwrt/package/emortal/default-settings/patch1.patch
-        [ -e $PACTH_2 ] && mv $PACTH_2 openwrt/package/emortal/default-settings/files/99-my-default-settings
 
 
         chmod +x $DIY_P2_SH
