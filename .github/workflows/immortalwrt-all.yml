@@ -32,11 +32,11 @@ on:
         default: true
         type: boolean
 
-      UPLOAD_BIN_DIR:
-        description: '是否上传完整固件目录'
-        required: true
-        default: true
-        type: boolean
+      # UPLOAD_BIN_DIR:
+      #   description: '是否上传完整固件目录'
+      #   required: true
+      #   default: true
+      #   type: boolean
 
       UPLOAD_FIRMWARE:
         description: '是否上传固件'
