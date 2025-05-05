@@ -19,5 +19,5 @@ jobs:
 
     - name: Verify output
       run: |
-        echo "Contents of 99-default-settings:"
-        cat package/emortal/default-settings/files/99-default-settings
+        echo "Contents of 99-MY-settings:"
+        cat package/emortal/default-settings/files/99-MY-settings
