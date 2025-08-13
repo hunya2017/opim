@@ -17,3 +17,9 @@ UCI_DEFAULTS="package/emortal/default-settings/files/99-my-default-settings"
 
 # 添加执行权限
 chmod +x "$UCI_DEFAULTS"
+# 修复 luci-app-store 版本号，防止 apk mkpkg 报错
+LUCISTORE_MK="feeds/istore/luci/luci-app-store/Makefile"
+if [ -f "$LUCISTORE_MK" ]; then
+    sed -i 's/\(PKG_VERSION:=.*\)-\([0-9]\+\)/\1-r\2/' "$LUCISTORE_MK"
+    echo "已修正 luci-app-store 版本号为 apk 兼容格式"
+fi
