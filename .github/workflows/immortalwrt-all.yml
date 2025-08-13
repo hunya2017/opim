@@ -327,19 +327,28 @@ jobs:
       if: steps.compile.outputs.status == 'success' && !cancelled()
       run: |
         cd openwrt
-        mkdir -p ./artifact/firmware
-        mkdir -p ./artifact/package
-        mkdir -p ./artifact/buildinfo
-        rm -rf $(find ./bin/targets/ -type d -name "packages")
-        cp -rf $(find ./bin/targets/ -type f) ./artifact/firmware/
-        cp -rf $(find ./bin/packages/ -type f -name "*.ipk") ./artifact/package/
-        cp -rf $(find ./bin/targets/ -type f -name "*.buildinfo" -o -name "*.manifest") ./artifact/buildinfo/
-        cp -rf ./.config ./artifact/buildinfo/${{ env.Firmware_Name }}.info
-        cp -rf ./.config ./artifact/firmware/${{ env.Firmware_Name }}.info
-        cp -rf ./feeds.conf.default ./artifact/buildinfo/
-        cd artifact/firmware/
-        rename "s/openwrt/${{ env.Firmware_Name }}/" *
+        mkdir -p ./artifact/firmware ./artifact/package ./artifact/buildinfo
 
+    # 删除 bin/targets 下的 packages 文件夹
+        find ./bin/targets/ -type d -name "packages" -exec rm -rf {} +
+
+    # 复制固件文件（允许空）
+       find ./bin/targets/ -type f -exec cp -t ./artifact/firmware/ {} +
+
+    # 复制 ipk 包（允许空）
+    find ./bin/packages/ -type f -name "*.ipk" -exec cp -t ./artifact/package/ {} +
+
+    # 复制 buildinfo / manifest 文件（允许空）
+    find ./bin/targets/ -type f \( -name "*.buildinfo" -o -name "*.manifest" \) -exec cp -t ./artifact/buildinfo/ {} +
+
+    # 配置文件和 feeds
+    cp -f ./.config ./artifact/buildinfo/${{ env.Firmware_Name }}.info
+    cp -f ./.config ./artifact/firmware/${{ env.Firmware_Name }}.info
+    cp -f ./feeds.conf.default ./artifact/buildinfo/
+
+    # 固件文件夹批量重命名（无文件时不报错）
+    cd artifact/firmware/
+    rename "s/openwrt/${{ env.Firmware_Name }}/" * || true
     # - name: 上传固件
     #   if: steps.compile.outputs.status == 'success' && github.event.inputs.UPLOAD_FIRMWARE == 'true' && !cancelled()
     #   uses: actions/upload-artifact@v4
