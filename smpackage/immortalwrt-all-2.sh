@@ -11,7 +11,7 @@
 #
 
 # 定义路径变量
-UCI_DEFAULTS="package/emortal/default-settings/files/99-my-default-settings"
+# UCI_DEFAULTS="package/emortal/default-settings/files/99-my-default-settings"
 
 
 
