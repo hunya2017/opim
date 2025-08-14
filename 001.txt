@@ -1,0 +1,14 @@
+uci del dhcp.lan.ra
+uci del dhcp.lan.ra_slaac
+uci del dhcp.lan.max_preferred_lifetime
+uci del dhcp.lan.max_valid_lifetime
+uci del dhcp.lan.dhcpv6
+uci set dhcp.lan.leasetime='2m'
+uci add dhcp host # =cfg05fe63
+uci set dhcp.@host[-1].name='armbian'
+uci add_list dhcp.@host[-1].mac='6A:CE:3B:D4:CB:8B'
+uci set dhcp.@host[-1].ip='192.168.10.158'
+uci add dhcp host # =cfg06fe63
+uci set dhcp.@host[-1].name='Windows-server'
+uci add_list dhcp.@host[-1].mac='7C:2B:E1:13:6E:83'
+uci set dhcp.@host[-1].ip='192.168.10.180'
