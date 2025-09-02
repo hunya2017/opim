@@ -23,3 +23,9 @@ if [ -f "$LUCISTORE_MK" ]; then
     sed -i 's/\(PKG_VERSION:=.*\)-\([0-9]\+\)/\1-r\2/' "$LUCISTORE_MK"
     echo "已修正 luci-app-store 版本号为 apk 兼容格式"
 fi
+# 修复 Rust 版本，避免 bootstrap 404
+RUST_MK="feeds/packages/lang/rust/Makefile"
+if [ -f "$RUST_MK" ]; then
+    sed -i 's/PKG_VERSION:=1\.85\.0/PKG_VERSION:=1.81.0/' "$RUST_MK"
+    echo "已将 Rust 版本固定为 1.81.0，避免 bootstrap 下载失败"
+fi
