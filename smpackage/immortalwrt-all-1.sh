@@ -10,9 +10,14 @@
 # Description: OpenWrt DIY script part 1 (Before Update feeds)
 # =================================================================
 
-git clone https://github.com/rufengsuixing/luci-app-adguardhome package/luci-app-adguardhome
-echo 'src-git istore https://github.com/linkease/istore;main' >> feeds.conf.default
-# add feed
-echo "src-git nikki https://github.com/nikkinikki-org/OpenWrt-nikki.git;main" >> "feeds.conf.default"
-echo "src-git momo https://github.com/nikkinikki-org/OpenWrt-momo.git;main" >> "feeds.conf.default"
+# 添加 iStore
+git clone https://github.com/linkease/istore package/istore
 
+# 添加 nikki
+git clone https://github.com/nikkinikki-org/OpenWrt-nikki.git package/OpenWrt-nikki
+
+# 添加 momo
+git clone https://github.com/nikkinikki-org/OpenWrt-momo.git package/OpenWrt-momo
+
+# 添加 AdGuardHome 插件
+git clone https://github.com/rufengsuixing/luci-app-adguardhome package/luci-app-adguardhome

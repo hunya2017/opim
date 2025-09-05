@@ -1,24 +1,27 @@
 From 1234567890 Mon Sep 17 00:00:00 2001
 From: Your Name <you@example.com>
 Date: 2025-05-05
-Subject: [PATCH] Add custom 99-my-default-settings script
+Subject: [PATCH] Add my-default-settings package
 
 ---
- Makefile | 2 ++
- 1 file changed, 2 insertions(+)
+ Makefile | 8 ++++++++
+ 1 file changed, 8 insertions(+)
 
 diff --git a/Makefile b/Makefile
 index abcdef0..1234567 100644
 --- a/Makefile
 +++ b/Makefile
-@@ -22,6 +22,7 @@ define Package/default-settings/install
- 	$(INSTALL_DIR) $(1)/etc/uci-defaults
- 	$(INSTALL_BIN) ./files/99-default-settings $(1)/etc/uci-defaults/
-+	$(INSTALL_BIN) ./files/99-my-default-settings $(1)/etc/uci-defaults/
+@@ -34,6 +34,14 @@ define Package/default-settings-chn/install
+ 	$(INSTALL_BIN) ./files/99-default-settings-chinese $(1)/etc/uci-defaults/
  endef
  
- define Package/default-settings-chn/install
- 	$(INSTALL_DIR) $(1)/etc/uci-defaults
- 	$(INSTALL_BIN) ./files/99-default-settings-chinese $(1)/etc/uci-defaults/
++define Package/my-default-settings/install
++	$(INSTALL_DIR) $(1)/etc/uci-defaults
 +	$(INSTALL_BIN) ./files/99-my-default-settings $(1)/etc/uci-defaults/
- endef
++endef
++
++$(eval $(call BuildPackage,my-default-settings))
++
++
+ $(eval $(call BuildPackage,default-settings))
+ $(eval $(call BuildPackage,default-settings-chn))

@@ -1,14 +1,23 @@
+# /etc/config/dhcp
+uci add dhcp host # =cfg05fe63
+uci set dhcp.@host[-1].name='DESKTOP-DR6M5VG'
+uci set dhcp.@host[-1].ip='192.168.10.107'
+uci add_list dhcp.@host[-1].mac='30:9C:23:E1:E3:72'
+uci add dhcp host # =cfg06fe63
+uci set dhcp.@host[-1].name='WIN-LMSJ088AVIQ'
+uci set dhcp.@host[-1].ip='192.168.10.180'
+uci add_list dhcp.@host[-1].mac='7C:2B:E1:13:6E:83'
+uci add dhcp host # =cfg07fe63
+uci set dhcp.@host[-1].name='armbian'
+uci set dhcp.@host[-1].ip='192.168.10.158'
+uci add_list dhcp.@host[-1].mac='6A:CE:3B:D4:CB:8B'
 uci del dhcp.lan.ra
 uci del dhcp.lan.ra_slaac
 uci del dhcp.lan.max_preferred_lifetime
 uci del dhcp.lan.max_valid_lifetime
 uci del dhcp.lan.dhcpv6
 uci set dhcp.lan.leasetime='2m'
-uci add dhcp host # =cfg05fe63
-uci set dhcp.@host[-1].name='armbian'
-uci add_list dhcp.@host[-1].mac='6A:CE:3B:D4:CB:8B'
-uci set dhcp.@host[-1].ip='192.168.10.158'
-uci add dhcp host # =cfg06fe63
-uci set dhcp.@host[-1].name='Windows-server'
-uci add_list dhcp.@host[-1].mac='7C:2B:E1:13:6E:83'
-uci set dhcp.@host[-1].ip='192.168.10.180'
+# /etc/config/vlmcsd
+uci del vlmcsd.config.internet_access
+uci set vlmcsd.config.enabled='1'
+uci set vlmcsd.config.auto_activate='1'

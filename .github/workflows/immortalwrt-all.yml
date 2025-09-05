@@ -187,7 +187,7 @@ jobs:
 
         cd package/emortal/default-settings
 
-        # patch -p1 < "patch1.patch"
+        patch -p1 < "patch1.patch"
 
     - name: patch2补丁和自定义设置
       run: |
